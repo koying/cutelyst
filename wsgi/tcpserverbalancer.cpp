@@ -364,11 +364,13 @@ int listenReuse(const QHostAddress &address, quint16 port, bool startListening)
         return -1;
     }
 
+#if defined(SO_REUSEPORT)
     int optval = 1;
     if (::setsockopt(socket, SOL_SOCKET, SO_REUSEPORT, &optval, sizeof(optval))) {
         qCCritical(CWSGI_BALANCER) << "Failed to set SO_REUSEPORT on socket" << socket;
         return -1;
     }
+#endif
 
     if (!nativeBind(socket, address, port)) {
         qCCritical(CWSGI_BALANCER) << "Failed to bind to socket" << socket;
@@ -418,7 +420,7 @@ TcpServer *TcpServerBalancer::createServer(CWsgiEngine *engine)
         connect(server, &TcpServer::createConnection, server, &TcpServer::incomingConnection, Qt::QueuedConnection);
     } else {
 
-#ifdef Q_OS_LINUX
+#if defined(Q_OS_LINUX) && defined(SO_REUSEPORT)
         if (m_wsgi->reusePort()) {
             connect(engine, &CWsgiEngine::started, this, [=] () {
                 int socket = listenReuse(m_address, m_port, true);
