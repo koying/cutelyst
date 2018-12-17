@@ -92,7 +92,7 @@ set (GETTEXT_PACKAGE "cutelyst")
 set (LOCALE_DIR "${DATADIR}/locale")
 set (VERSION "${CUTELYST_VERSION}")
 set (BUILDDIR "${CMAKE_BINARY_DIR}")
-set (CUTELYST_PLUGINS_DIR "${CMAKE_INSTALL_PREFIX}/lib/cutelyst2-plugins" CACHE PATH "Output directory for cutelyst plugins")
+set (CUTELYST_PLUGINS_DIR "lib/cutelyst2-plugins" CACHE PATH "Output directory for cutelyst plugins")
 set (DOXYGEN_TIMESTAMP "YES" CACHE STRING "Enables or disables the footer timestamp in API documentation. Allowed values: YES or NO")
 set (QHG_LOCATION "qhelpgenerator" CACHE FILEPATH "Path to the qhelpgenerator executable")
 set (MANDIR "${DATADIR}/man" CACHE PATH "Directory to install man pages")
@@ -100,7 +100,7 @@ set (I18NDIR "${DATADIR}/cutelyst${PROJECT_VERSION_MAJOR}/translations" CACHE PA
 
 add_definitions("-DLOCALSTATEDIR=\"${LOCALSTATEDIR}\"")
 
-set(CMAKE_INSTALL_LIBDIR "${CMAKE_INSTALL_PREFIX}/lib/${CMAKE_LIBRARY_ARCHITECTURE}" CACHE PATH "Output directory for libraries")
+set(CMAKE_INSTALL_LIBDIR "lib/${CMAKE_LIBRARY_ARCHITECTURE}" CACHE PATH "Output directory for libraries")
 
 configure_file(config.h.in ${CMAKE_BINARY_DIR}/config.h)
 
@@ -174,7 +174,7 @@ if (PLUGIN_UWSGI)
     find_program(UWSGI_EXEC_PATH NAMES uwsgi)
     set (UWSGI_EXEC_PATH "uwsgi" CACHE FILEPATH "Path to the uWSGI executable")
     find_program(UWSGI_BIN NAMES uwsgi)
-    set (UWSGI_PLUGINS_DIR "${CMAKE_INSTALL_PREFIX}/lib/uwsgi/plugins" CACHE PATH "Output directory for uWSGI plugin")
+    set (UWSGI_PLUGINS_DIR "lib/uwsgi/plugins" CACHE PATH "Output directory for uWSGI plugin")
     add_subdirectory(uwsgiEngine)
     message(STATUS "PLUGIN: uWSGI, enabled.")
 endif ()

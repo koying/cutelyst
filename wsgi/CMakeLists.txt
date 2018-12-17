@@ -127,4 +127,4 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/CutelystQt5WSGI.pc.in
 )
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/Cutelyst2Qt5WSGI.pc DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
 
-install(TARGETS cutelyst-wsgi2 DESTINATION ${CMAKE_INSTALL_PREFIX}/bin/)
+install(TARGETS cutelyst-wsgi2 DESTINATION bin)
